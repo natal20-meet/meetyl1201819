@@ -1,10 +1,19 @@
-def iseven(number):
-	if (number%2 == 0):
-		return "even"
-	else:
-		return "odd"
+a = [1,2,3,4,5]
+def make_list ():
+	x = [a[0], a[4]]
+	print (x)
 
+#make_list()
 
-y=7
-if(iseven(y) == "even"):
-	print(y/2)
+b = [-2,-1,0,1,2,3,4,5,6,7,8,9]
+def values_less_5(x): 
+	for number in b:
+		if number <=5:
+			print number
+#values_less_5(b) 
+c = [2,4,6,8,10,12,14,16,18]
+d = [2,6,10,14,18]
+def make_newlist():
+	for number in c & d:
+		if number 
+
