@@ -17,6 +17,7 @@ angle_3 = 55
 length_3 = 50
 angle_4 = 120
 def draw_shape(angle,length):
+	turtle.begin_fill()
 	for i in range(4):
 		turtle.forward(length_2)
 		turtle.left(angle_2)
@@ -25,9 +26,11 @@ def draw_shape(angle,length):
 		turtle.forward(length_3)
 		turtle.left(angle_4)
 		turtle.forward(length_3)
+		turtle.end_fill()
 draw_shape(angle,length)
 
 turtle.mainloop()
+
 
 
 
