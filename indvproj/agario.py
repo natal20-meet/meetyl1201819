@@ -3,7 +3,6 @@ import time
 import random
 import math
 from ball import Ball 
-#from Turtle import Turtle Screen
 turtle.tracer(10000,0)
 turtle.setup(1500,1000)
 
@@ -36,28 +35,21 @@ MINIMUM_BALL_DX = -5
 MAXIMUM_BALL_DX = 5 
 MINIMUM_BALL_DY = -5
 MAXIMUM_BALL_DY = 5 
-
+global score
+score  = 0
+height  = 350
+width = 40 
+turtle.penup()
+turtle.hideturtle()
+turtle.goto(width,height)
  
 #LISTS
 FOOD = []
 BALLS = []
 #PICS OF BALLS
 MY_BALL.shape("earth2.gif")
-pic3 = turtle.shape("earth2.gif")
-#turning PICS into turtles
-"""
-pic1 = turtle.shape("uranus.gif")
-pic2 = turtle.shape("jupiter.gif")
-pic3 = turtle.shape("earth2.gif")
-pic4 = turtle.shape("3D_Neptune.gif")
-pic5 = turtle.shape("18_mercury_new.gif")
-pic6 = turtle.shape("mars.gif")
-pic7 = turtle.shape("saturn.gif")
-pic8 = turtle.shape("saturn.gif")
-pic9 = turtle.shape("planet.gif")
-pic10 = turtle.shape("planet2.gif")
 
-"""
+
 def pick_planet():
 	turtle = Turtle(visible=False)
 	pic1.goto(20,20)
@@ -75,9 +67,7 @@ def onclick_handler(x, y):
             turtle.undo()
             turtle.write("Option 3", font=FONT) 
 
-	#screen = Screen()
-	#screen.onscreenclick(onclick_handler)
-	#screen.mainloop()
+	
 
 #HOW MANY play balls AND RANDOM CHARACTERISTICS FOR EACH
 for i in range(NUMBER_OF_BALLS):
@@ -104,6 +94,7 @@ def make_food():
 		FOOD.append(food)
 		food.shape("Star.gif")
 def eat_food():
+	global score
 	for food in FOOD:
 		if check_collision(MY_BALL,food):
 			MY_BALL_r = MY_BALL.r
@@ -121,6 +112,11 @@ def eat_food():
 			if MY_BALL.r < food.r:
 				return False 	
 			if MY_BALL.r > food.r:
+				score = score + 1 
+				turtle.undo()
+				turtle.update()
+				turtle.goto(width,height)
+				turtle.write(str(score), move = False, align="left",font=("Arial",50,"bold"))
 				MY_BALL.r += 1  
 				MY_BALL.shapesize((MY_BALL_r+1)/10)
 				food.goto(new_x,new_y)
@@ -219,13 +215,19 @@ def check_myball_collision():
 				turtle.hideturtle()
 				turtle.goto(0,0)
 				turtle.write("GAME OVER! NICE TRY!",move=False, align='center' ,font=("Arial", 23, "bold"))
+				turtle.update()
+				turtle.sleep(2000)
 				return False 	
 				
 			if MY_BALL.r > ball.r:
+				global score
+				score = score + ball.r
+				turtle.undo()
+				turtle.update()
 				MY_BALL.r += 1  
 				MY_BALL.shapesize((MY_BALL_r+1)/10)
-				pic1.shapesize((MY_BALL_r+1)/10)
-				pic1.resizemode("earth2.gif")
+				ball.shapesize((MY_BALL_r+1)/10)
+				ball.resizemode("earth2.gif")
 				ball.goto(new_x,new_y)
 				ball.dx=x_speed
 				ball.dy=y_speed
@@ -259,7 +261,7 @@ while RUNNING:
 	check_all_balls_collision() 
 for ball in BALLS:
 	ball.shapesize(0.000000001)   
-
+turtle.undo()
 turtle.update()
 
 
